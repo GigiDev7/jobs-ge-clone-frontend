@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BiSearch } from "react-icons/bi";
-import SingleJob from "./SingleJob";
+import JobHeader from "./JobHeader";
+
+import { useSelector, useDispatch } from "react-redux";
+import { getJobs } from "../actions/jobs";
 
 const Jobs = () => {
+  const dispatch = useDispatch();
+  const { jobs } = useSelector((state) => state.jobs);
+
+  useEffect(() => {
+    dispatch(getJobs());
+  }, [dispatch]);
+
   return (
     <div className=" mt-10 w-[94%] mx-auto">
       <div className="space-x-6 relative flex justify-end">
@@ -21,13 +31,14 @@ const Jobs = () => {
         <p>Advertisements</p>
         <p>Provided By</p>
         <div className="flex space-x-16">
-          <p>Published</p>
+          <p className="">Published</p>
           <p>Deadline</p>
         </div>
       </div>
       <div className="mt-8">
-        <SingleJob />
-        <SingleJob />
+        {jobs.map((job) => (
+          <JobHeader key={job._id} job={job} />
+        ))}
       </div>
     </div>
   );

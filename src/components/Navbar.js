@@ -47,8 +47,27 @@ const Navbar = () => {
             Contact
           </NavLink>
         </div>
-        <div className="">
-          <NavLink to="/login">Login</NavLink>
+        <div className="space-x-4">
+          <NavLink
+            className={(navData) =>
+              navData.isActive
+                ? "bg-gray-300 text-black py-[17px] px-4"
+                : "link"
+            }
+            to="/login"
+          >
+            Login
+          </NavLink>
+          <NavLink
+            className={(navData) =>
+              navData.isActive
+                ? "bg-gray-300 text-black py-[17px] px-4"
+                : "link"
+            }
+            to="/register"
+          >
+            Register
+          </NavLink>
         </div>
       </nav>
     </div>
