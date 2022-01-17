@@ -19,7 +19,7 @@ const SingleJob = () => {
             All Jobs
           </span>
         </Link>
-        <Link to="/">
+        <Link to={`/company/${job.company}`}>
           <AiOutlineBars className="inline-block font-bold text-sm text-blue-700" />
           <span className="inline-block ml-1 font-semibold text-sm text-blue-500">
             All Ads by this Company

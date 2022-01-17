@@ -6,6 +6,9 @@ const jobsReducer = (state = { jobs: [], job: {} }, action) => {
     case "GET_SINGLE_JOB":
       return { ...state, job: action.payload };
 
+    case "GET_BY_COMPANY":
+      return { ...state, jobs: action.payload };
+
     default:
       return state;
   }

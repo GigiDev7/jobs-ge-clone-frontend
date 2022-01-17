@@ -1,32 +1,9 @@
-import React, { useEffect } from "react";
-import { BiSearch } from "react-icons/bi";
+import React from "react";
 import JobHeader from "./JobHeader";
 
-import { useSelector, useDispatch } from "react-redux";
-import { getJobs } from "../actions/jobs";
-
-const Jobs = () => {
-  const dispatch = useDispatch();
-  const { jobs } = useSelector((state) => state.jobs);
-
-  useEffect(() => {
-    dispatch(getJobs());
-  }, [dispatch]);
-
+const Jobs = ({ jobs }) => {
   return (
-    <div className=" mt-10 w-[94%] mx-auto">
-      <div className="space-x-6 relative flex justify-end">
-        <select className=" w-44 bg-gray-100 text-xs py-1 px-2 border-[1px] rounded-[3px] outline-0">
-          <option>All Categories</option>
-          <option>1</option>
-          <option>1</option>
-        </select>
-        <input
-          type="search"
-          className="bg-gray-100 w-60 border-[1px] rounded-[3px] relative"
-        />
-        <BiSearch className="absolute top-1 right-1 cursor-pointer" />
-      </div>
+    <div className="">
       <div className="flex justify-between w-[90%] mx-auto  mt-32 font-semibold ">
         <p>Advertisements</p>
         <p>Provided By</p>

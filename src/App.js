@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import Job from "./pages/Job";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import CompanyJobs from "./pages/CompanyJobs";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/:jobId" element={<Job />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/company/:companyName" element={<CompanyJobs />} />
       </Routes>
       <Footer />
     </>

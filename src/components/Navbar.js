@@ -1,15 +1,17 @@
 import React from "react";
 import { FaPaperPlane } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <div className="mt-8">
       <div className="flex items-center ml-10">
-        <FaPaperPlane className="text-5xl text-blue-700" />
-        <p className="text-5xl font-medium border-r-2 ml-3 pr-3">
-          <span className=" text-blue-700 ">jobs.</span>ge
-        </p>
+        <Link to="/" className="flex items-center">
+          <FaPaperPlane className="text-5xl text-blue-700" />
+          <p className="text-5xl font-medium border-r-2 ml-3 pr-3">
+            <span className=" text-blue-700 ">jobs.</span>ge
+          </p>
+        </Link>
         <p className="pl-3 w-[200px] text-gray-500">
           Connecting professionals and employers since 1998
         </p>

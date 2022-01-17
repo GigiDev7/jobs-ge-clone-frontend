@@ -1,24 +1,24 @@
 import React, { useEffect } from "react";
 import Jobs from "../components/Jobs";
-import Search from "../components/Search";
 
 import { useSelector, useDispatch } from "react-redux";
-import { getJobs } from "../actions/jobs";
+import { getByCompany } from "../actions/jobs";
+import { useParams } from "react-router-dom";
 
-const Home = () => {
+const CompanyJobs = () => {
   const dispatch = useDispatch();
+  const { companyName } = useParams();
   const { jobs } = useSelector((state) => state.jobs);
 
   useEffect(() => {
-    dispatch(getJobs());
-  }, [dispatch]);
+    dispatch(getByCompany(companyName));
+  }, [dispatch, companyName]);
 
   return (
     <div className="w-[94%] mx-auto mt-10">
-      <Search />
       <Jobs jobs={jobs} />
     </div>
   );
 };
 
-export default Home;
+export default CompanyJobs;
