@@ -1,29 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import formatDate from "../utils/formatDate";
 
-const formatDate = (str) => {
-  const monthNames = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const date = new Date(str);
-  const day = date.getDate();
-  const monthNum = date.getMonth();
-  const month = monthNames[monthNum];
-  const nextMonth = monthNames[monthNum + 1];
-
-  return { day, month, nextMonth };
-};
 const SingleJob = ({ job }) => {
   const { day, month, nextMonth } = formatDate(job.createdAt);
 

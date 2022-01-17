@@ -1,7 +1,11 @@
-const jobsReducer = (state = { jobs: [] }, action) => {
+const jobsReducer = (state = { jobs: [], job: {} }, action) => {
   switch (action.type) {
     case "GET_JOBS":
       return { ...state, jobs: action.payload };
+
+    case "GET_SINGLE_JOB":
+      return { ...state, job: action.payload };
+
     default:
       return state;
   }
