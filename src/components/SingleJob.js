@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { AiOutlineBars } from "react-icons/ai";
@@ -8,6 +8,10 @@ import formatDate from "../utils/formatDate";
 const SingleJob = () => {
   const { job } = useSelector((state) => state.jobs);
   const { day, month, nextMonth } = formatDate(job.createdAt);
+
+  if (!day) {
+    return null;
+  }
 
   return (
     <div>
