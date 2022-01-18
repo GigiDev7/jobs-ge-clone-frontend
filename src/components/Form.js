@@ -11,22 +11,35 @@ const Form = ({ type }) => {
 
   const emailRef = useRef();
   const passwordRef = useRef();
+  const firstnameRef = useRef();
+  const lastnameRef = useRef();
 
   const handleIconClick = () => {
     setIsPasswordShown((prevState) => !prevState);
   };
 
-  const handleFormSubmit = (e) => {
+  const handleLoginSubmit = (e) => {
     e.preventDefault();
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     dispatch(login({ email, password }, navigate));
   };
 
+  const handleRegisterSubmit = (e) => {
+    e.preventDefault();
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+    const firstname = firstnameRef.current.value;
+    const lastname = lastnameRef.current.value;
+    dispatch(signup({ email, password, firstname, lastname }, navigate));
+  };
+
   return (
     <div className="flex text-center justify-center h-[100%] py-12 border-[2px] rounded w-[70%] lg:w-[50%] mx-auto items-center bg-[#eff4f6] mt-10">
       <form
-        onSubmit={handleFormSubmit}
+        onSubmit={
+          type === "register" ? handleRegisterSubmit : handleLoginSubmit
+        }
         className="space-y-6 h-[100%] flex flex-col justify-center"
       >
         {type !== "register" ? null : (
@@ -36,6 +49,7 @@ const Form = ({ type }) => {
                 Firstname:
               </label>
               <input
+                ref={firstnameRef}
                 id="firstname"
                 type="text"
                 className="pl-1 border-[1px] outline-0 "
@@ -46,6 +60,7 @@ const Form = ({ type }) => {
                 Lastname:
               </label>
               <input
+                ref={lastnameRef}
                 id="lastname"
                 type="text"
                 className="pl-1 border-[1px] outline-0 "
