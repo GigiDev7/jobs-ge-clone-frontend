@@ -1,5 +1,9 @@
-import { createRoutesFromChildren } from "react-router-dom";
-import { get_jobs, get_job, get_by_company } from "../api/index";
+import {
+  get_jobs,
+  get_job,
+  get_by_company,
+  get_by_category,
+} from "../api/index";
 
 export const getJobs = () => async (dispatch) => {
   try {
@@ -23,6 +27,15 @@ export const getByCompany = (companyNamy) => async (dispatch) => {
   try {
     const { data } = await get_by_company(companyNamy);
     dispatch({ type: "GET_BY_COMPANY", payload: data });
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
+
+export const getByCategory = (category) => async (dispatch) => {
+  try {
+    const { data } = await get_by_category(category);
+    dispatch({ type: "GET_BY_CATEGORY", payload: data });
   } catch (error) {
     console.log(error.response.data);
   }

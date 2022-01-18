@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { AiOutlineBars } from "react-icons/ai";
