@@ -12,6 +12,9 @@ const jobsReducer = (state = { jobs: [], job: {} }, action) => {
     case "GET_BY_CATEGORY":
       return { ...state, jobs: action.payload };
 
+    case "GET_BY_QUERY":
+      return { ...state, jobs: action.payload };
+
     default:
       return state;
   }

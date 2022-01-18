@@ -10,3 +10,5 @@ export const get_by_company = (companyName) =>
 
 export const get_by_category = (category) =>
   axios.get(`${url}/api/jobs?category=${category}`);
+
+export const get_by_query = (query) => axios.get(`${url}/api/jobs?q=${query}`);
