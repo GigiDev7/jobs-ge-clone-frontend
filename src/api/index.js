@@ -12,3 +12,9 @@ export const get_by_category = (category) =>
   axios.get(`${url}/api/jobs?category=${category}`);
 
 export const get_by_query = (query) => axios.get(`${url}/api/jobs?q=${query}`);
+
+export const login_post = (formData) =>
+  axios.post(`${url}/api/login`, formData);
+
+export const signup_post = (formData) =>
+  axios.post(`${url}/api/signup`, formData);
