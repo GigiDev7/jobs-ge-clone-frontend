@@ -18,6 +18,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     setIsShown(false);
+    localStorage.removeItem("user");
     dispatch({ type: "LOGOUT" });
   };
 

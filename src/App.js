@@ -1,3 +1,4 @@
+import { useLayoutEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
@@ -9,7 +10,16 @@ import CompanyJobs from "./pages/CompanyJobs";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
+import { useDispatch } from "react-redux";
+
 function App() {
+  const dispatch = useDispatch();
+
+  useLayoutEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    dispatch({ type: "SET_USER", payload: user });
+  }, [dispatch]);
+
   return (
     <>
       <Navbar />
