@@ -5,14 +5,20 @@ import { RiProfileLine } from "react-icons/ri";
 import { IoMdHelpCircle } from "react-icons/io";
 import { NavLink, Link } from "react-router-dom";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
   const [isShown, setIsShown] = useState(false);
+  const dispatch = useDispatch();
 
   const handleShow = () => {
     setIsShown((prevState) => !prevState);
+  };
+
+  const handleLogout = () => {
+    setIsShown(false);
+    dispatch({ type: "LOGOUT" });
   };
 
   return (
@@ -106,7 +112,10 @@ const Navbar = () => {
                   Help Center
                 </span>
               </p>
-              <button className="text-black w-[100%] text-center mt-8 hover:bg-gray-200 py-2 border-t">
+              <button
+                onClick={handleLogout}
+                className="text-black w-[100%] text-center mt-8 hover:bg-gray-200 py-2 border-t"
+              >
                 Sign out
               </button>
             </div>
