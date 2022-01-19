@@ -9,6 +9,7 @@ import Contact from "./pages/Contact";
 import CompanyJobs from "./pages/CompanyJobs";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
 
 import { useDispatch } from "react-redux";
 
@@ -31,6 +32,7 @@ function App() {
         <Route path="/company/:companyName" element={<CompanyJobs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
       <Footer />
     </>
