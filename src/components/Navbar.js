@@ -7,6 +7,8 @@ import { NavLink, Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 
+import { motion } from "framer-motion";
+
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
   const [isShown, setIsShown] = useState(false);
@@ -98,8 +100,16 @@ const Navbar = () => {
         )}
         {isShown && (
           <>
-            <div className="triangle lg:right-64"></div>
-            <div className=" pt-2 absolute top-14 right-28 lg:right-56 w-52 h-[13rem] bg-white shadow-md rounded-md shadow-black z-10">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ y: [-5, 0], opacity: 1 }}
+              className="triangle lg:right-64"
+            ></motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ y: [-5, 0], opacity: 1 }}
+              className=" pt-2 absolute top-14 right-28 lg:right-56 w-52 h-[13rem] bg-white shadow-md rounded-md shadow-black z-10"
+            >
               <h1 className="text-black font-semibold pl-2">
                 {user?.firstname} {user?.lastname}
               </h1>
@@ -119,7 +129,7 @@ const Navbar = () => {
               >
                 Sign out
               </button>
-            </div>
+            </motion.div>
           </>
         )}
       </nav>
