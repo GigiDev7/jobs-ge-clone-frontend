@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const Modal = ({ setIsModalShown, eventType, job }) => {
+  const [formInput, setFormInput] = useState({
+    title: "",
+    company: "",
+    category: "",
+    description: "",
+  });
+  console.log(formInput);
+
+  const handleInputChange = (e) => {
+    setFormInput({ ...formInput, [e.target.name]: e.target.value });
+  };
+
   return (
     <div className="absolute flex justify-between bg-blue-500 top-[55%] left-2/4 -translate-x-[50%] -translate-y-[55%] z-50 w-5/6 h-5/6 lg:w-5/6 shadow-lg shadow-black rounded-md">
       <div className="mt-16 pl-4 w-[100%] lg:w-[70%] lg:mx-auto">
@@ -11,7 +23,9 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
               Title:
             </label>
             <input
-              value={eventType === "update" ? job?.title : ""}
+              name="title"
+              onChange={handleInputChange}
+              value={eventType === "update" ? job?.title : formInput.title}
               className="outline-0 w-[100%]"
               id="title"
               type="text"
@@ -22,7 +36,9 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
               Company:
             </label>
             <input
-              value={eventType === "update" ? job?.company : ""}
+              name="company"
+              onChange={handleInputChange}
+              value={eventType === "update" ? job?.company : formInput.company}
               className="outline-0 w-[100%]"
               id="company"
               type="text"
@@ -33,7 +49,9 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
               Category:
             </label>
             <select
-              value={eventType === "update" ? job.category : ""}
+              name="category"
+              onChange={handleInputChange}
+              value={eventType === "update" ? job.category : formInput.category}
               className="text-sm px-2 outline-0"
             >
               <option>Select category</option>
@@ -46,7 +64,13 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
               Description:
             </label>
             <textarea
-              value={eventType === "update" ? job?.description : ""}
+              name="description"
+              onChange={handleInputChange}
+              value={
+                eventType === "update"
+                  ? job?.description
+                  : formInput.description
+              }
               rows="8"
               className="w-[100%] outline-0 px-1"
             />
