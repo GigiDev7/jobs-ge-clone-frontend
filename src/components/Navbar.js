@@ -3,7 +3,7 @@ import { FaPaperPlane } from "react-icons/fa";
 import { BsFillPersonFill } from "react-icons/bs";
 import { RiProfileLine } from "react-icons/ri";
 import { IoMdHelpCircle } from "react-icons/io";
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -14,6 +14,7 @@ const Navbar = () => {
   const [isShown, setIsShown] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleShow = () => {
     setIsShown((prevState) => !prevState);
@@ -23,6 +24,11 @@ const Navbar = () => {
     setIsShown(false);
     localStorage.removeItem("user");
     dispatch({ type: "LOGOUT" });
+  };
+
+  const handleProfileClick = () => {
+    navigate("/dashboard");
+    setIsShown(false);
   };
 
   if (location.pathname === "/dashboard") {
@@ -118,13 +124,13 @@ const Navbar = () => {
               <h1 className="text-black font-semibold pl-2">
                 {user?.firstname} {user?.lastname}
               </h1>
-              <Link
-                to="/dashboard"
-                className="mt-4 pl-2 flex items-center hover:bg-gray-200 py-2"
+              <p
+                onClick={handleProfileClick}
+                className="cursor-pointer mt-4 pl-2 flex items-center hover:bg-gray-200 py-2"
               >
                 <RiProfileLine className="text-black text-xl inline-block" />{" "}
                 <span className="text-black ml-4 font-semibold">Profile</span>
-              </Link>
+              </p>
               <p className="pl-2 py-2 flex items-center hover:bg-gray-200">
                 <IoMdHelpCircle className="text-black text-xl inline-block" />
                 <span className="text-black ml-4 font-semibold">
