@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
-const Modal = ({ hideModalHandler }) => {
+const Modal = ({ setIsModalShown }) => {
   return (
     <div className="absolute flex justify-between bg-blue-500 top-[55%] left-2/4 -translate-x-[50%] -translate-y-[55%] z-50 w-5/6 h-5/6 lg:w-5/6 shadow-lg shadow-black rounded-md">
       <div className="mt-16 pl-4 w-[100%] lg:w-[70%] lg:mx-auto">
@@ -46,7 +46,7 @@ const Modal = ({ hideModalHandler }) => {
       </div>
       <div>
         <AiOutlineCloseCircle
-          onClick={() => hideModalHandler(false)}
+          onClick={() => setIsModalShown(false)}
           className="text-white font-bold text-2xl cursor-pointer"
         />
       </div>

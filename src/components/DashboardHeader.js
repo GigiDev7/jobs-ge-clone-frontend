@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
 import { BiArrowBack } from "react-icons/bi";
 
-import Modal from "./Modal";
-
-const DashboardHeader = () => {
-  const [isModalShown, setIsModalShown] = useState(false);
+const DashboardHeader = ({ setIsModalShown }) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -55,7 +52,6 @@ const DashboardHeader = () => {
           Post a job!
         </button>
       </div>
-      {isModalShown && <Modal hideModalHandler={setIsModalShown} />}
     </>
   );
 };
