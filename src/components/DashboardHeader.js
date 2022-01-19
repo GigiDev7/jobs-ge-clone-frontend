@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
 import { BiArrowBack } from "react-icons/bi";
 
+import Modal from "./Modal";
+
 const DashboardHeader = () => {
+  const [isModalShown, setIsModalShown] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -45,10 +48,14 @@ const DashboardHeader = () => {
       </div>
       <h1 className="text-center mt-16 font-semibold text-2xl">My Jobs</h1>
       <div className="flex justify-center">
-        <button className=" mt-12 bg-blue-500 py-2 px-3 hover:bg-blue-700 rounded-sm">
+        <button
+          onClick={() => setIsModalShown(true)}
+          className=" mt-12 bg-blue-500 py-2 px-3 hover:bg-blue-700 rounded-sm"
+        >
           Post a job!
         </button>
       </div>
+      {isModalShown && <Modal hideModalHandler={setIsModalShown} />}
     </>
   );
 };
