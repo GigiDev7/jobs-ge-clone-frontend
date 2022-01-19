@@ -1,4 +1,4 @@
-const jobsReducer = (state = { jobs: [], job: {} }, action) => {
+const jobsReducer = (state = { jobs: [], job: {}, myjobs: [] }, action) => {
   switch (action.type) {
     case "GET_JOBS":
       return { ...state, jobs: action.payload };
@@ -14,6 +14,9 @@ const jobsReducer = (state = { jobs: [], job: {} }, action) => {
 
     case "GET_BY_QUERY":
       return { ...state, jobs: action.payload };
+
+    case "GET_MY_JOBS":
+      return { ...state, myjobs: action.payload };
 
     default:
       return state;

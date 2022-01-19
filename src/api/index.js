@@ -18,3 +18,10 @@ export const login_post = (formData) =>
 
 export const signup_post = (formData) =>
   axios.post(`${url}/api/signup`, formData);
+
+export const get_my_jobs = (token) =>
+  axios.get(`${url}/api/jobs/myjobs`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
