@@ -9,12 +9,13 @@ import { getMyJobs } from "../actions/jobs";
 const Dashboard = () => {
   const [isModalShown, setIsModalShown] = useState(false);
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+
   const { myjobs } = useSelector((state) => state.jobs);
 
   useEffect(() => {
-    dispatch(getMyJobs(user?.token));
-  }, [dispatch, user?.token]);
+    const user = JSON.parse(localStorage.getItem("user"));
+    dispatch(getMyJobs(user.token));
+  }, [dispatch]);
 
   return (
     <div className="w-[90%] mx-auto mt-12">
@@ -23,7 +24,7 @@ const Dashboard = () => {
         <p className="mt-16 text-center font-semibold">No Jobs Found!</p>
       )}
       {myjobs.map((job) => (
-        <JobCard job={job} setIsModalShown={setIsModalShown} />
+        <JobCard key={job._id} job={job} setIsModalShown={setIsModalShown} />
       ))}
       {isModalShown && <Modal setIsModalShown={setIsModalShown} />}
     </div>
