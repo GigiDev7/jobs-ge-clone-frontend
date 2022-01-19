@@ -44,6 +44,11 @@ const DashboardHeader = () => {
         </div>
       </div>
       <h1 className="text-center mt-16 font-semibold text-2xl">My Jobs</h1>
+      <div className="flex justify-center">
+        <button className=" mt-12 bg-blue-500 py-2 px-3 hover:bg-blue-700 rounded-sm">
+          Post a job!
+        </button>
+      </div>
     </>
   );
 };
