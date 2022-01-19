@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const Modal = ({ setIsModalShown, eventType, job }) => {
@@ -8,7 +8,13 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
     category: "",
     description: "",
   });
-  console.log(formInput);
+
+  useEffect(() => {
+    if (eventType === "update") {
+      const { title, company, category, description } = job;
+      setFormInput({ title, company, category, description });
+    }
+  }, [eventType, job]);
 
   const handleInputChange = (e) => {
     setFormInput({ ...formInput, [e.target.name]: e.target.value });
@@ -25,7 +31,7 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
             <input
               name="title"
               onChange={handleInputChange}
-              value={eventType === "update" ? job?.title : formInput.title}
+              value={formInput.title}
               className="outline-0 w-[100%]"
               id="title"
               type="text"
@@ -38,7 +44,7 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
             <input
               name="company"
               onChange={handleInputChange}
-              value={eventType === "update" ? job?.company : formInput.company}
+              value={formInput.company}
               className="outline-0 w-[100%]"
               id="company"
               type="text"
@@ -51,7 +57,7 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
             <select
               name="category"
               onChange={handleInputChange}
-              value={eventType === "update" ? job.category : formInput.category}
+              value={formInput.category}
               className="text-sm px-2 outline-0"
             >
               <option>Select category</option>
@@ -66,11 +72,7 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
             <textarea
               name="description"
               onChange={handleInputChange}
-              value={
-                eventType === "update"
-                  ? job?.description
-                  : formInput.description
-              }
+              value={formInput.description}
               rows="8"
               className="w-[100%] outline-0 px-1"
             />
