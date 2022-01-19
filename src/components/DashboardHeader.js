@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { IoIosLogOut } from "react-icons/io";
 import { BiArrowBack } from "react-icons/bi";
 
-const DashboardHeader = ({ setIsModalShown }) => {
+const DashboardHeader = ({ setIsModalShown, setEventType }) => {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,6 +17,11 @@ const DashboardHeader = ({ setIsModalShown }) => {
 
   const handleBackClick = () => {
     navigate("/");
+  };
+
+  const handlePostJobClick = () => {
+    setEventType("create");
+    setIsModalShown(true);
   };
 
   return (
@@ -46,7 +51,7 @@ const DashboardHeader = ({ setIsModalShown }) => {
       <h1 className="text-center mt-16 font-semibold text-2xl">My Jobs</h1>
       <div className="flex justify-center">
         <button
-          onClick={() => setIsModalShown(true)}
+          onClick={handlePostJobClick}
           className=" mt-12 bg-blue-500 py-2 px-3 hover:bg-blue-700 rounded-sm"
         >
           Post a job!

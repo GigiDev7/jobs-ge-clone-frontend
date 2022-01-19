@@ -8,6 +8,8 @@ import { getMyJobs } from "../actions/jobs";
 
 const Dashboard = () => {
   const [isModalShown, setIsModalShown] = useState(false);
+  const [eventType, setEventType] = useState("");
+  const [job, setJob] = useState({});
   const dispatch = useDispatch();
 
   const { myjobs } = useSelector((state) => state.jobs);
@@ -19,14 +21,29 @@ const Dashboard = () => {
 
   return (
     <div className="w-[90%] mx-auto mt-12">
-      <DashboardHeader setIsModalShown={setIsModalShown} />
+      <DashboardHeader
+        setEventType={setEventType}
+        setIsModalShown={setIsModalShown}
+      />
       {myjobs.length < 1 && (
         <p className="mt-16 text-center font-semibold">No Jobs Found!</p>
       )}
       {myjobs.map((job) => (
-        <JobCard key={job._id} job={job} setIsModalShown={setIsModalShown} />
+        <JobCard
+          setEventType={setEventType}
+          key={job._id}
+          job={job}
+          setIsModalShown={setIsModalShown}
+          setJob={setJob}
+        />
       ))}
-      {isModalShown && <Modal setIsModalShown={setIsModalShown} />}
+      {isModalShown && (
+        <Modal
+          job={job}
+          eventType={eventType}
+          setIsModalShown={setIsModalShown}
+        />
+      )}
     </div>
   );
 };
