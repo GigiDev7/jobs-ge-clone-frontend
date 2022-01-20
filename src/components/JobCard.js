@@ -2,11 +2,22 @@ import React from "react";
 import { MdDelete } from "react-icons/md";
 import { AiFillEdit } from "react-icons/ai";
 
+import { deleteJob, getMyJobs } from "../actions/jobs";
+import { useSelector, useDispatch } from "react-redux";
+
 const JobCard = ({ job, setIsModalShown, setEventType, setJob }) => {
-  const handleClick = () => {
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  const handleEditClick = () => {
     setEventType("update");
     setJob(job);
     setIsModalShown(true);
+  };
+
+  const handleDeleteClick = () => {
+    dispatch(deleteJob(user.token, job._id));
+    dispatch(getMyJobs(user.token));
   };
 
   return (
@@ -16,10 +27,13 @@ const JobCard = ({ job, setIsModalShown, setEventType, setJob }) => {
       </h1>
       <div className="flex space-x-4">
         <AiFillEdit
-          onClick={handleClick}
+          onClick={handleEditClick}
           className="text-xl text-blue-600 cursor-pointer"
         />
-        <MdDelete className="text-xl text-red-600 cursor-pointer" />
+        <MdDelete
+          onClick={handleDeleteClick}
+          className="text-xl text-red-600 cursor-pointer"
+        />
       </div>
     </div>
   );

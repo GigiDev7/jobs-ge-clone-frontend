@@ -7,6 +7,7 @@ import {
   get_my_jobs,
   post_job,
   update_job,
+  delete_job,
 } from "../api/index";
 
 export const getJobs = () => async (dispatch) => {
@@ -78,5 +79,14 @@ export const updateJob = (token, jobId, jobData) => async (dispatch) => {
     dispatch({ type: "UPDATE_JOB" });
   } catch (error) {
     console.log(error.response.data);
+  }
+};
+
+export const deleteJob = (token, jobId) => async (dispatch) => {
+  try {
+    await delete_job(token, jobId);
+    dispatch({ type: "DELETE_JOB" });
+  } catch (error) {
+    console.log(error.response.daata);
   }
 };

@@ -39,3 +39,10 @@ export const update_job = (token, jobId, jobData) =>
       Authorization: `Bearer ${token}`,
     },
   });
+
+export const delete_job = (token, jobId) =>
+  axios.delete(`${url}/api/jobs/${jobId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
