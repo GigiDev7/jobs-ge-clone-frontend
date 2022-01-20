@@ -25,3 +25,10 @@ export const get_my_jobs = (token) =>
       Authorization: `Bearer ${token}`,
     },
   });
+
+export const post_job = (token, jobData) =>
+  axios.post(`${url}/api/jobs`, jobData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });

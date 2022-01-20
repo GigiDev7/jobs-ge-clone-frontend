@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
+import { postJob } from "../actions/jobs";
+import { useSelector, useDispatch } from "react-redux";
+
 const Modal = ({ setIsModalShown, eventType, job }) => {
   const [formInput, setFormInput] = useState({
     title: "",
@@ -8,6 +11,8 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
     category: "",
     description: "",
   });
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (eventType === "update") {
@@ -20,10 +25,18 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
     setFormInput({ ...formInput, [e.target.name]: e.target.value });
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    if (eventType === "create") {
+      dispatch(postJob(user.token, formInput));
+    }
+    setIsModalShown(false);
+  };
+
   return (
     <div className="absolute flex justify-between bg-blue-500 top-[55%] left-2/4 -translate-x-[50%] -translate-y-[55%] z-50 w-5/6 h-5/6 lg:w-5/6 shadow-lg shadow-black rounded-md">
       <div className="mt-16 pl-4 w-[100%] lg:w-[70%] lg:mx-auto">
-        <form className="flex flex-col space-y-6 ">
+        <form onSubmit={handleFormSubmit} className="flex flex-col space-y-6 ">
           <div className="flex justify-between">
             <label className="font-semibold w-[25%]" htmlFor="title">
               Title:
