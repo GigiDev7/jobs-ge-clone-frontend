@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
-import { postJob } from "../actions/jobs";
+import { postJob, updateJob } from "../actions/jobs";
 import { useSelector, useDispatch } from "react-redux";
 
 const Modal = ({ setIsModalShown, eventType, job }) => {
@@ -29,6 +29,8 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
     e.preventDefault();
     if (eventType === "create") {
       dispatch(postJob(user.token, formInput));
+    } else if (eventType === "update") {
+      dispatch(updateJob(user.token, job._id, formInput));
     }
     setIsModalShown(false);
   };

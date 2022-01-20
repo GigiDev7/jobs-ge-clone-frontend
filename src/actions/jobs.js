@@ -6,6 +6,7 @@ import {
   get_by_query,
   get_my_jobs,
   post_job,
+  update_job,
 } from "../api/index";
 
 export const getJobs = () => async (dispatch) => {
@@ -66,6 +67,15 @@ export const postJob = (token, jobData) => async (dispatch) => {
   try {
     const { data } = await post_job(token, jobData);
     dispatch({ type: "POST_JOB", payload: data });
+  } catch (error) {
+    console.log(error.response.data);
+  }
+};
+
+export const updateJob = (token, jobId, jobData) => async (dispatch) => {
+  try {
+    await update_job(token, jobId, jobData);
+    dispatch({ type: "UPDATE_JOB" });
   } catch (error) {
     console.log(error.response.data);
   }

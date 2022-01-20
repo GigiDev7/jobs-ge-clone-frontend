@@ -21,6 +21,9 @@ const jobsReducer = (state = { jobs: [], job: {}, myjobs: [] }, action) => {
     case "POST_JOB":
       return { ...state, myjobs: [...state.myjobs, action.payload] };
 
+    case "UPDATE_JOB":
+      return { ...state };
+
     default:
       return state;
   }

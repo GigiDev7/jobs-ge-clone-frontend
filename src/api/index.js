@@ -32,3 +32,10 @@ export const post_job = (token, jobData) =>
       Authorization: `Bearer ${token}`,
     },
   });
+
+export const update_job = (token, jobId, jobData) =>
+  axios.patch(`${url}/api/jobs/${jobId}`, jobData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
