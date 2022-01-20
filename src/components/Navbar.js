@@ -113,12 +113,12 @@ const Navbar = () => {
           <>
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ y: [-5, 0], opacity: 1 }}
+              animate={{ y: [-8, 0], opacity: 1 }}
               className="triangle lg:right-64"
             ></motion.div>
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ y: [-5, 0], opacity: 1 }}
+              animate={{ y: [-8, 0], opacity: 1 }}
               className=" pt-2 absolute top-14 right-28 lg:right-56 w-52 h-[13rem] bg-white shadow-md rounded-md shadow-black z-10"
             >
               <h1 className="text-black font-semibold pl-2">
