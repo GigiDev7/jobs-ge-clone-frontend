@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 
-import { postJob, updateJob } from "../actions/jobs";
+import { postJob, updateJob, getMyJobs } from "../actions/jobs";
 import { useSelector, useDispatch } from "react-redux";
 
 const Modal = ({ setIsModalShown, eventType, job }) => {
@@ -25,12 +25,17 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
     setFormInput({ ...formInput, [e.target.name]: e.target.value });
   };
 
+  const handleModalClose = () => {
+    setIsModalShown(false);
+  };
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     if (eventType === "create") {
       dispatch(postJob(user.token, formInput));
     } else if (eventType === "update") {
       dispatch(updateJob(user.token, job._id, formInput));
+      dispatch(getMyJobs(user.token));
     }
     setIsModalShown(false);
   };
@@ -104,7 +109,7 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
       </div>
       <div>
         <AiOutlineCloseCircle
-          onClick={() => setIsModalShown(false)}
+          onClick={handleModalClose}
           className="text-white font-bold text-2xl cursor-pointer"
         />
       </div>
