@@ -12,6 +12,7 @@ const Search = () => {
   const handleCategoryChange = () => {
     if (categoryRef.current.value === "All Categories") {
       dispatch(getJobs());
+      return;
     }
 
     dispatch(getByCategory(categoryRef.current.value));
