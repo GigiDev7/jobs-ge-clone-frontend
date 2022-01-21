@@ -5,6 +5,7 @@ import { postJob, updateJob, getMyJobs } from "../actions/jobs";
 import { useSelector, useDispatch } from "react-redux";
 
 const Modal = ({ setIsModalShown, eventType, job }) => {
+  const [isError, setIsError] = useState(false);
   const [formInput, setFormInput] = useState({
     title: "",
     company: "",
@@ -31,6 +32,14 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+
+    for (const key in formInput) {
+      if (formInput[key] === "") {
+        setIsError(true);
+        return;
+      }
+    }
+
     if (eventType === "create") {
       dispatch(postJob(user.token, formInput));
     } else if (eventType === "update") {
@@ -42,6 +51,11 @@ const Modal = ({ setIsModalShown, eventType, job }) => {
 
   return (
     <div className="absolute flex justify-between bg-blue-500 top-[55%] left-2/4 -translate-x-[50%] -translate-y-[55%] z-50 w-5/6 h-5/6 lg:w-5/6 shadow-lg shadow-black rounded-md">
+      {isError && (
+        <p className="text-red-600 text-lg font-semibold absolute top-4 left-2/4 -translate-x-2/4">
+          Please fill all fields!
+        </p>
+      )}
       <div className="mt-16 pl-4 w-[100%] lg:w-[70%] lg:mx-auto">
         <form onSubmit={handleFormSubmit} className="flex flex-col space-y-6 ">
           <div className="flex justify-between">
