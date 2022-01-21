@@ -6,6 +6,7 @@ import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 const Form = ({ type }) => {
   const [isPasswordShown, setIsPasswordShown] = useState();
+  const [areFieldsComplete, setAreFieldsComplete] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -33,10 +34,17 @@ const Form = ({ type }) => {
 
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
+    setAreFieldsComplete(true);
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     const firstname = firstnameRef.current.value;
     const lastname = lastnameRef.current.value;
+
+    if (firstname === "" || lastname === "") {
+      setAreFieldsComplete(false);
+      return;
+    }
+
     dispatch(signup({ email, password, firstname, lastname }, navigate));
   };
 
@@ -50,7 +58,7 @@ const Form = ({ type }) => {
       >
         {type !== "register" ? null : (
           <>
-            <div className="flex justify-between">
+            <div className="flex justify-between relative">
               <label htmlFor="firstname" className="text-blue-700">
                 Firstname:
               </label>
@@ -60,6 +68,16 @@ const Form = ({ type }) => {
                 type="text"
                 className="pl-1 border-[1px] outline-0 "
               />
+              {!areFieldsComplete && (
+                <span className="absolute w-[100%] -top-8 left-[15%] text-sm text-red-600">
+                  Please fill all fields
+                </span>
+              )}
+              {errors && areFieldsComplete && (
+                <span className="absolute w-[100%] -top-8 left-[15%] text-sm text-red-600">
+                  {errors?.email ? errors.email : errors.password}
+                </span>
+              )}
             </div>
             <div className="flex justify-between">
               <label htmlFor="lastname" className="text-blue-700">
