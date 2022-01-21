@@ -1,6 +1,6 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signup, login } from "../actions/user";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
@@ -9,10 +9,16 @@ const Form = ({ type }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const { errors } = useSelector((state) => state.auth);
+
   const emailRef = useRef();
   const passwordRef = useRef();
   const firstnameRef = useRef();
   const lastnameRef = useRef();
+
+  useEffect(() => {
+    dispatch({ type: "ERROR", payload: {} });
+  }, [dispatch]);
 
   const handleIconClick = () => {
     setIsPasswordShown((prevState) => !prevState);
@@ -68,7 +74,7 @@ const Form = ({ type }) => {
             </div>
           </>
         )}
-        <div className="flex justify-between">
+        <div className="flex justify-between relative">
           <label htmlFor="email" className="text-blue-700">
             Email:
           </label>
@@ -78,12 +84,18 @@ const Form = ({ type }) => {
             type="email"
             className="pl-1 border-[1px] outline-0 "
           />
+          {errors?.message && type !== "register" && (
+            <span className="absolute w-[100%] -top-8 left-[15%] text-sm text-red-600">
+              {errors.message}!
+            </span>
+          )}
         </div>
         <div className="space-x-4 relative">
           <label htmlFor="password" className=" text-blue-700">
             Password:
           </label>
           <input
+            minLength={6}
             ref={passwordRef}
             id="password"
             type={isPasswordShown ? "text" : "password"}

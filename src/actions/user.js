@@ -7,7 +7,7 @@ export const login = (formData, navigate) => async (dispatch) => {
     localStorage.setItem("user", JSON.stringify(data));
     navigate("/", { replace: true });
   } catch (error) {
-    console.log(error.response.data);
+    dispatch({ type: "ERROR", payload: error.response.data });
   }
 };
 

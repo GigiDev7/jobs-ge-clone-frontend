@@ -1,4 +1,4 @@
-const authReducer = (state = { user: null }, action) => {
+const authReducer = (state = { user: null, errors: {} }, action) => {
   switch (action.type) {
     case "LOGIN":
       return { ...state, user: action.payload };
@@ -11,6 +11,9 @@ const authReducer = (state = { user: null }, action) => {
 
     case "SET_USER":
       return { ...state, user: action.payload };
+
+    case "ERROR":
+      return { ...state, errors: action.payload };
 
     default:
       return state;
