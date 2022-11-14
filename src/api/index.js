@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://jobs-ge.herokuapp.com";
+const url = "https://jobs-gi.onrender.com";
 
 export const get_jobs = () => axios.get(`${url}/api/jobs`);
 export const get_job = (jobId) => axios.get(`${url}/api/jobs/${jobId}`);
